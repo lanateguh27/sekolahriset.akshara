@@ -1,20 +1,14 @@
 <?php
 
-use Illuminate\\Support\\Facades\\Route;
-use Illuminate\\Support\\Facades\\Storage;
-use App\\Http\\Controllers\\ParticipantController;
-use App\\Http\\Controllers\\Admin\\AuthController;
-use App\\Http\\Controllers\\Admin\\DashboardController;
-use App\\Http\\Controllers\\Admin\\EventController;
-use App\\Http\\Controllers\\Admin\\ParticipantController as AdminParticipantController;
-use App\\Models\\Event;
-use App\\Models\\Participant;
-
-/*
-|--------------------------------------------------------------------------
-| Halaman Utama
-|--------------------------------------------------------------------------
-*/
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\ParticipantController as AdminParticipantController;
+use App\Models\Event;
+use App\Models\Participant;
 
 Route::get('/', function () {
     $events = Event::where('status', 'published')
@@ -24,23 +18,11 @@ Route::get('/', function () {
     return view('pages.home', compact('events'));
 });
 
-/*
-|--------------------------------------------------------------------------
-| Pendaftaran Peserta
-|--------------------------------------------------------------------------
-*/
-
 Route::get('/pendaftaran', [ParticipantController::class, 'create'])
     ->name('pendaftaran.create');
 
 Route::post('/pendaftaran', [ParticipantController::class, 'store'])
     ->name('pendaftaran.store');
-
-/*
-|--------------------------------------------------------------------------
-| Route Login Admin
-|--------------------------------------------------------------------------
-*/
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthController::class, 'showLogin'])
@@ -49,12 +31,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/admin/login', [AuthController::class, 'login'])
         ->name('admin.login.submit');
 });
-
-/*
-|--------------------------------------------------------------------------
-| Route Admin yang Membutuhkan Login
-|--------------------------------------------------------------------------
-*/
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])
@@ -75,12 +51,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::delete('/participants/{participant}', [AdminParticipantController::class, 'destroy'])
         ->name('admin.participants.destroy');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Menampilkan Bukti Pembayaran
-    |--------------------------------------------------------------------------
-    */
-
     Route::get('/participants/{participant}/payment-proof', function (Participant $participant) {
         abort_if(empty($participant->payment_proof), 404);
 
@@ -99,12 +69,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             'inline'
         );
     })->name('admin.participants.payment-proof');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Menampilkan Foto KTM
-    |--------------------------------------------------------------------------
-    */
 
     Route::get('/participants/{participant}/ktm', function (Participant $participant) {
         abort_if(empty($participant->ktm_path), 404);
