@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\\Http\\Controllers\\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Participant;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\\Http\\Controllers\\Controller;
+use App\\Models\\Participant;
+use Illuminate\\Http\\Request;
+use Illuminate\\Support\\Facades\\Storage;
 
 class ParticipantController extends Controller
 {
@@ -48,11 +48,17 @@ class ParticipantController extends Controller
             ->with('success', 'Peserta berhasil diverifikasi.');
     }
 
-    // Menghapus peserta
+    // Menghapus peserta beserta file dokumennya
     public function destroy(Participant $participant)
     {
+        $disk = Storage::disk('local');
+
         if ($participant->payment_proof) {
-            Storage::delete($participant->payment_proof);
+            $disk->delete($participant->payment_proof);
+        }
+
+        if ($participant->ktm_path) {
+            $disk->delete($participant->ktm_path);
         }
 
         $participant->delete();
