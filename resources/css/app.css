@@ -1,0 +1,4262 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+/* =========================================
+   NAVBAR SEKOLAH RISET AKSHARA
+   ========================================= */
+
+/* Menggunakan font Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+    --navbar-primary: #0866d8;
+    --navbar-secondary: #00c7a5;
+    --navbar-text: #252525;
+    --navbar-height: 94px;
+}
+
+/* Reset dasar */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--navbar-height);
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Navbar utama */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+    height: var(--navbar-height);
+
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* Container navbar */
+.navbar-container {
+    width: 100%;
+    max-width: 1440px;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+}
+
+/* Logo */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.navbar-logo img {
+    display: block;
+
+    width: 190px;
+    height: 65px;
+
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* Menu navigasi */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 30px;
+    margin-left: auto;
+}
+
+.navbar-link {
+    position: relative;
+
+    color: var(--navbar-text);
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: color 0.25s ease;
+}
+
+.navbar-link:hover {
+    color: var(--navbar-primary);
+}
+
+/* Garis bawah saat hover */
+.navbar-link::after {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+
+    width: 0;
+    height: 2px;
+
+    background: var(--navbar-primary);
+    transition: width 0.25s ease;
+}
+
+.navbar-link:hover::after {
+    width: 100%;
+}
+
+/* Tombol Daftar Program */
+.navbar-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    min-width: 138px;
+    height: 44px;
+
+    padding: 0 24px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        110deg,
+        #0866d8 0%,
+        #00c7a5 100%
+    );
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.navbar-cta:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 120, 190, 0.2);
+}
+
+/* Tombol hamburger */
+.navbar-toggle {
+    display: none;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 9px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #f5f7fa;
+    cursor: pointer;
+}
+
+.navbar-toggle span {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    margin: 5px 0;
+
+    background: #222222;
+
+    transition: 0.25s ease;
+}
+
+/* =========================================
+   RESPONSIVE NAVBAR
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .navbar-container {
+        padding: 0 22px;
+        gap: 20px;
+    }
+
+    .navbar-logo img {
+        width: 165px;
+    }
+
+    .navbar-menu {
+        gap: 20px;
+    }
+
+    .navbar-link {
+        font-size: 12px;
+    }
+
+    .navbar-cta {
+        min-width: 125px;
+        padding: 0 18px;
+    }
+}
+
+/* Tampilan tablet dan mobile */
+@media (max-width: 768px) {
+
+    :root {
+        --navbar-height: 78px;
+    }
+
+    .navbar-container {
+        padding: 0 18px;
+        gap: 12px;
+    }
+
+    .navbar-logo img {
+        width: 155px;
+        height: 58px;
+    }
+
+    /* Menu dropdown mobile */
+    .navbar-menu {
+        display: none;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        padding: 12px 20px 20px;
+
+        background: #ffffff;
+        border-top: 1px solid #eeeeee;
+
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-link {
+        display: block;
+
+        padding: 14px 5px;
+
+        font-size: 14px;
+    }
+
+    .navbar-link::after {
+        display: none;
+    }
+
+    /* Tombol daftar */
+    .navbar-cta {
+        min-width: auto;
+        height: 40px;
+
+        padding: 0 17px;
+
+        font-size: 11px;
+    }
+
+    /* Hamburger aktif */
+    .navbar-toggle {
+        display: block;
+        flex-shrink: 0;
+    }
+}
+
+/* Mobile kecil */
+@media (max-width: 420px) {
+
+    .navbar-container {
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    .navbar-logo img {
+        width: 125px;
+    }
+
+    .navbar-cta {
+        height: 36px;
+        padding: 0 12px;
+
+        font-size: 10px;
+    }
+
+    .navbar-toggle {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+/* =========================================
+   HALAMAN BERANDA
+   ========================================= */
+
+.home-section {
+    min-height: 500px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 80px 24px;
+
+    background: #f7faff;
+    text-align: center;
+}
+
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.home-container h1 {
+    margin-bottom: 20px;
+
+    color: #0866d8;
+
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+}
+
+.home-container p {
+    margin-bottom: 30px;
+
+    color: #555555;
+    font-size: 16px;
+}
+
+.content-section {
+    min-height: 300px;
+
+    padding: 80px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+}
+
+.content-section:nth-child(even) {
+    background: #f7faff;
+}
+
+.content-section h2 {
+    color: #0866d8;
+    font-size: 30px;
+}
+
+
+/* =========================================
+   HERO SECTION - SEKOLAH RISET AKSHARA
+   ========================================= */
+
+/* Section utama */
+
+/* Section utama */
+.hero-section {
+    position: relative;
+
+    width: 100%;
+    min-height: 510px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 60px 16px;
+
+    overflow: hidden;
+
+    background: #222222;
+}
+
+/* Gambar background dari home.blade.php */
+.hero-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 0;
+}
+
+/* Overlay gelap di atas gambar */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.12) 0%,
+        rgba(0, 0, 0, 0.30) 40%,
+        rgba(0, 0, 0, 0.55) 100%
+    );
+
+    z-index: 1;
+}
+
+/* Panel konten */
+.hero-container {
+    position: relative;
+    z-index: 2;
+
+    width: 60%;
+    max-width: 850px;
+    min-height: 370px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 50px 80px;
+
+    background: rgba(20, 20, 20, 0.42);
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 24px;
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+
+/* Konten di dalam panel */
+.hero-content {
+    width: 100%;
+    color: #ffffff;
+}
+
+/* Teks kecil di atas judul */
+.hero-eyebrow {
+    display: block;
+
+    margin-bottom: 16px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+/* Judul utama */
+.hero-title {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(30px, 3.5vw, 46px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+}
+
+/* Deskripsi hero */
+.hero-description {
+    max-width: 600px;
+
+    margin: 4px 0 12px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Container tombol */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+
+/* Style dasar tombol */
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 0 18px;
+
+    border-radius: 30px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition: all 0.25s ease;
+}
+
+/* Tombol utama */
+.hero-button-primary {
+    background: linear-gradient(
+        110deg,
+        #0866d8 0%,
+        #00c7a5 100%
+    );
+
+    border: 1px solid transparent;
+}
+
+.hero-button-primary:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 160, 190, 0.3);
+}
+
+/* Tombol outline */
+.hero-button-outline {
+    background: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.hero-button-outline:hover {
+    background: #ffffff;
+    color: #0866d8;
+}
+
+/* =========================================
+   RESPONSIVE HERO SECTION
+   ========================================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+    .hero-section {
+        min-height: 480px;
+    }
+
+    .hero-container {
+        width: 70%;
+        min-height: 340px;
+
+        padding: 40px 45px;
+    }
+
+    .hero-title {
+        font-size: clamp(30px, 4vw, 40px);
+    }
+
+    .hero-actions {
+        gap: 12px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .hero-section {
+        min-height: 500px;
+
+        justify-content: center;
+
+        padding: 35px 18px;
+
+        background-position: 35% center;
+    }
+
+    .hero-container {
+        width: 100%;
+        max-width: 600px;
+
+        min-height: auto;
+
+        padding: 35px 25px;
+
+        border-radius: 20px;
+
+        background: rgba(20, 20, 20, 0.55);
+    }
+
+    .hero-eyebrow {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: clamp(28px, 6vw, 38px);
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+    }
+
+    .hero-description {
+        margin-top: 12px;
+
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .hero-actions {
+        gap: 10px;
+    }
+
+    .hero-button {
+        min-height: 38px;
+        padding: 0 15px;
+
+        font-size: 10px;
+    }
+}
+
+/* Mobile kecil */
+@media (max-width: 420px) {
+
+    .hero-section {
+        min-height: 480px;
+        padding: 25px 14px;
+    }
+
+    .hero-container {
+        padding: 28px 20px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-button {
+        width: fit-content;
+    }
+}
+
+
+/* =========================================
+   SECTION TENTANG - SEKOLAH RISET AKSHARA
+   ========================================= */
+
+/* Section utama */
+.about-section {
+    width: 100%;
+
+    padding: 64px 40px 48px;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Container utama */
+.about-container {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   BAGIAN PERTAMA: RESEARCH SKILLS
+   ========================================= */
+
+/* Area intro */
+.about-intro {
+    max-width: 1150px;
+
+    margin: 0 auto;
+    padding: 0 28px;
+}
+
+/* Judul utama */
+.about-main-title {
+    margin: 0 0 24px;
+
+    color: #080808;
+
+    font-size: clamp(32px, 4vw, 38px);
+    font-weight: 700;
+    line-height: 1.08;
+
+    letter-spacing: -1.3px;
+}
+
+/* Gradient pada baris kedua */
+.about-main-title span {
+    background: linear-gradient(
+        100deg,
+        #0866d8 0%,
+        #00c7a5 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Deskripsi */
+.about-description {
+    max-width: 720px;
+
+    margin: 0 0 22px;
+
+    color: #333333;
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Grid empat kartu */
+.about-skills-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+/* Kartu keunggulan */
+.about-skill-card {
+    position: relative;
+
+    min-height: 95px;
+
+    padding: 18px 18px 14px;
+
+    background: #ffffff;
+
+    border-radius: 0 0 12px 12px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+}
+
+/* Garis gradient bagian atas */
+.about-skill-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: linear-gradient(
+        100deg,
+        #0866d8 0%,
+        #00c7a5 100%
+    );
+}
+
+/* Judul kartu */
+.about-skill-card h3 {
+    margin: 0 0 10px;
+
+    color: #008bd7;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+/* Deskripsi kartu */
+.about-skill-card p {
+    margin: 0;
+
+    color: #444444;
+
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================
+   GARIS PEMISAH
+   ========================================= */
+
+.about-divider {
+    width: 100%;
+    height: 1px;
+
+    margin: 28px 0 42px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(8, 102, 216, 0.15),
+        rgba(0, 199, 165, 0.20)
+    );
+}
+
+/* =========================================
+   BAGIAN KEDUA: PENGALAMAN RISET
+   ========================================= */
+
+.about-experience {
+    width: 100%;
+}
+
+/* Judul pengalaman */
+.about-experience-title {
+    margin: 0 0 12px;
+
+    text-align: center;
+
+    background: linear-gradient(
+        100deg,
+        #0866d8 0%,
+        #00c7a5 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    font-size: clamp(22px, 3vw, 24px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Deskripsi pengalaman */
+.about-experience-description {
+    margin: 0 0 14px;
+
+    color: #333333;
+
+    text-align: center;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Grid lima kartu */
+.about-experience-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+/* Kartu pengalaman */
+.about-experience-card {
+    position: relative;
+
+    min-height: 164px;
+
+    padding: 30px 16px 20px;
+
+    background: #ffffff;
+
+    border-radius: 3px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+}
+
+/* Garis biru bagian atas */
+.about-experience-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #0755b5;
+}
+
+/* Judul kartu pengalaman */
+.about-experience-card h3 {
+    min-height: 28px;
+
+    margin: 0 0 12px;
+
+    color: #0054b8;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+/* Deskripsi kartu pengalaman */
+.about-experience-card p {
+    margin: 0;
+
+    color: #333333;
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .about-section {
+        padding: 55px 24px 40px;
+    }
+
+    .about-intro {
+        padding: 0 15px;
+    }
+
+    .about-skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .about-skill-card {
+        min-height: 120px;
+    }
+
+    .about-experience-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .about-experience-card {
+        min-height: 150px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .about-section {
+        padding: 45px 18px 35px;
+    }
+
+    .about-intro {
+        padding: 0;
+    }
+
+    .about-main-title {
+        margin-bottom: 18px;
+
+        font-size: 30px;
+        letter-spacing: -0.8px;
+    }
+
+    .about-description {
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+
+    .about-skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .about-skill-card {
+        min-height: 130px;
+        padding: 18px 14px 14px;
+    }
+
+    .about-skill-card h3 {
+        font-size: 12px;
+    }
+
+    .about-skill-card p {
+        font-size: 9px;
+    }
+
+    .about-divider {
+        margin: 30px 0;
+    }
+
+    .about-experience-title {
+        font-size: 20px;
+        line-height: 1.3;
+    }
+
+    .about-experience-description {
+        font-size: 11px;
+    }
+
+    .desktop-break {
+        display: none;
+    }
+
+    .about-experience-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .about-experience-card {
+        min-height: 160px;
+        padding: 26px 14px 18px;
+    }
+
+    .about-experience-card h3 {
+        font-size: 12px;
+    }
+
+    .about-experience-card p {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .about-section {
+        padding: 35px 14px;
+    }
+
+    .about-main-title {
+        font-size: 26px;
+    }
+
+    .about-skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-skill-card {
+        min-height: 105px;
+    }
+
+    .about-experience-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-experience-card {
+        min-height: 130px;
+    }
+}
+
+
+/* =========================================
+   SECTION PROGRAM - UPCOMING AGENDA
+   ========================================= */
+
+.program-section {
+    width: 100%;
+
+    padding: 18px 40px 26px;
+
+    background: #1055b8;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container utama */
+.program-container {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER PROGRAM
+   ========================================= */
+
+.program-header {
+    margin-bottom: 26px;
+
+    text-align: center;
+}
+
+.program-title {
+    margin: 0 0 8px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.program-description {
+    max-width: 750px;
+
+    margin: 0 auto;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================
+   GRID PROGRAM
+   ========================================= */
+
+.program-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+/* =========================================
+   CARD PROGRAM
+   ========================================= */
+
+.program-card {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    background: #ffffff;
+
+    border-radius: 0 0 14px 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Hover kartu */
+.program-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   POSTER PROGRAM
+   ========================================= */
+
+.program-poster {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 200 / 270;
+
+    overflow: hidden;
+
+    background: #e8eef5;
+}
+
+/* Gambar poster */
+.program-poster img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    transition: transform 0.3s ease;
+}
+
+.program-card:hover .program-poster img {
+    transform: scale(1.02);
+}
+
+/* =========================================
+   KONTEN CARD
+   ========================================= */
+
+.program-card-content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 14px 16px 18px;
+}
+
+/* Judul program */
+.program-card-title {
+    min-height: 38px;
+
+    margin: 0 0 12px;
+
+    color: #111111;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* =========================================
+   INFORMASI PROGRAM
+   ========================================= */
+
+.program-meta {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 14px;
+}
+
+/* Setiap informasi */
+.program-meta-item {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 9px;
+
+    color: #333333;
+
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+/* Ikon informasi */
+.program-meta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    color: #304ce8;
+}
+
+.program-meta-icon svg {
+    display: block;
+
+    width: 15px;
+    height: 15px;
+}
+
+/* =========================================
+   TOMBOL DAFTAR
+   ========================================= */
+
+.program-register-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 34px;
+
+    margin-top: auto;
+
+    padding: 8px 12px;
+
+    background: #1055b8;
+
+    border-radius: 30px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-align: center;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.program-register-button:hover {
+    background: #073f91;
+
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .program-section {
+        padding: 30px 24px;
+    }
+
+    .program-container {
+        max-width: 850px;
+    }
+
+    .program-grid {
+        gap: 18px;
+    }
+
+    .program-card-content {
+        padding: 13px 12px 15px;
+    }
+
+    .program-card-title {
+        font-size: 11px;
+    }
+
+    .program-meta-item {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .program-section {
+        padding: 35px 20px;
+    }
+
+    .program-title {
+        font-size: 22px;
+    }
+
+    .program-description {
+        font-size: 11px;
+    }
+
+    .program-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+    .program-card-title {
+        font-size: 11px;
+    }
+
+    .program-meta-item {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .program-section {
+        padding: 30px 18px;
+    }
+
+    .program-header {
+        margin-bottom: 22px;
+    }
+
+    .program-title {
+        font-size: 20px;
+    }
+
+    .program-description {
+        font-size: 11px;
+    }
+
+    .program-grid {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+
+        max-width: 320px;
+
+        margin: 0 auto;
+    }
+
+    .program-card-content {
+        padding: 16px 18px 18px;
+    }
+
+    .program-card-title {
+        font-size: 13px;
+        min-height: auto;
+    }
+
+    .program-meta-item {
+        font-size: 10px;
+    }
+
+    .program-register-button {
+        min-height: 38px;
+
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   SECTION KENAPA SEKOLAH RISET AKSHARA
+   ========================================= */
+
+.why-akshara-section {
+    width: 100%;
+
+    padding: 30px 38px 24px;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container */
+.why-akshara-container {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER SECTION
+   ========================================= */
+
+.why-akshara-header {
+    margin-bottom: 24px;
+
+    text-align: center;
+}
+
+/* Judul */
+.why-akshara-title {
+    margin: 0 0 10px;
+
+    color: #0755b5;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Deskripsi */
+.why-akshara-description {
+    margin: 0 auto;
+
+    max-width: 900px;
+
+    color: #333333;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================
+   GRID KARTU
+   ========================================= */
+
+.why-akshara-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px 18px;
+
+    align-items: stretch;
+}
+
+/* =========================================
+   KARTU KEUNGGULAN
+   ========================================= */
+
+.why-akshara-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 164px;
+
+    padding: 26px 24px 20px;
+
+    background: #ffffff;
+
+    border-radius: 3px;
+
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Garis biru bagian atas */
+.why-akshara-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #0755b5;
+}
+
+/* Efek hover */
+.why-akshara-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   IKON
+   ========================================= */
+
+.why-akshara-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 46px;
+    height: 48px;
+
+    margin-bottom: 5px;
+
+    color: #0755b5;
+}
+
+.why-akshara-icon svg {
+    display: block;
+
+    width: 44px;
+    height: 44px;
+}
+
+/* =========================================
+   JUDUL KARTU
+   ========================================= */
+
+.why-akshara-card h3 {
+    margin: 0 0 6px;
+
+    color: #0755b5;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* =========================================
+   DESKRIPSI KARTU
+   ========================================= */
+
+.why-akshara-card p {
+    margin: 0;
+
+    color: #333333;
+
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .why-akshara-section {
+        padding: 35px 24px 30px;
+    }
+
+    .why-akshara-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+    .why-akshara-card {
+        min-height: 170px;
+
+        padding: 25px 22px 20px;
+    }
+
+    .why-akshara-title {
+        font-size: 22px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .why-akshara-section {
+        padding: 35px 18px 25px;
+    }
+
+    .why-akshara-header {
+        margin-bottom: 22px;
+    }
+
+    .why-akshara-title {
+        font-size: 20px;
+        line-height: 1.35;
+    }
+
+    .why-akshara-description {
+        font-size: 11px;
+    }
+
+    .why-desktop-break {
+        display: none;
+    }
+
+    .why-akshara-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .why-akshara-card {
+        min-height: 150px;
+
+        padding: 25px 22px 20px;
+    }
+
+    .why-akshara-icon {
+        width: 42px;
+        height: 44px;
+    }
+
+    .why-akshara-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .why-akshara-card h3 {
+        font-size: 14px;
+    }
+
+    .why-akshara-card p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+}
+
+/* =========================================
+   POSISI EVENT DI UPCOMING AGENDA
+========================================= */
+
+/* Tampilan daftar event */
+.program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* Jika hanya ada satu event, tampilkan di tengah */
+.program-grid .program-card:only-child {
+    grid-column: 2;
+}
+
+/* Pesan ketika belum ada event */
+.program-empty {
+    grid-column: 1 / -1;
+    padding: 40px 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.program-empty h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.program-empty p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Placeholder poster sementara */
+.program-poster-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #1055b8, #7652b5);
+    color: #ffffff;
+    text-align: center;
+}
+
+.program-poster-placeholder span {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .program-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .program-grid .program-card:only-child {
+        grid-column: 1 / -1;
+        width: 100%;
+        max-width: 320px;
+        justify-self: center;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .program-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .program-grid .program-card:only-child {
+        grid-column: auto;
+    }
+}
+
+/* =========================================
+   SECTION LOGO MITRA
+   ========================================= */
+
+.partner-section {
+    width: 100%;
+
+    padding: 0;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* =========================================
+   JUDUL MITRA
+   ========================================= */
+
+.partner-header {
+    width: 100%;
+
+    padding: 14px 20px 10px;
+
+    text-align: center;
+}
+
+.partner-title {
+    margin: 0;
+
+    color: #999999;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* =========================================
+   STRIP LOGO
+   ========================================= */
+
+.partner-logo-strip {
+    width: 100%;
+
+    padding: 14px 30px;
+
+    background: #e5e3e9;
+}
+
+/* Container logo */
+.partner-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 36px;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+/* Item logo */
+.partner-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 1 150px;
+
+    min-width: 0;
+    height: 40px;
+}
+
+/* Gambar logo */
+.partner-logo-item img {
+    display: block;
+
+    width: 100%;
+    max-width: 130px;
+    height: 100%;
+
+    object-fit: contain;
+
+    /* Warna abu-abu seperti referensi */
+    filter: grayscale(100%);
+    opacity: 0.65;
+
+    transition:
+        filter 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* Hover logo */
+.partner-logo-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .partner-logo-container {
+        gap: 24px;
+    }
+
+    .partner-logo-item {
+        flex-basis: 120px;
+    }
+
+    .partner-logo-item img {
+        max-width: 110px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .partner-header {
+        padding: 18px 15px 12px;
+    }
+
+    .partner-title {
+        font-size: 15px;
+    }
+
+    .partner-logo-strip {
+        padding: 18px 15px;
+    }
+
+    .partner-logo-container {
+        display: grid;
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        gap: 20px 14px;
+    }
+
+    .partner-logo-item {
+        width: 100%;
+        height: 35px;
+
+        flex: none;
+    }
+
+    .partner-logo-item img {
+        max-width: 100px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .partner-logo-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+    .partner-logo-item {
+        height: 32px;
+    }
+}
+
+
+/* =========================================
+   SECTION TESTIMONI
+   ========================================= */
+
+.testimonial-section {
+    width: 100%;
+
+    padding: 68px 40px 40px;
+
+    background: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container utama */
+.testimonial-container {
+    width: 100%;
+    max-width: 1080px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER TESTIMONI
+   ========================================= */
+
+.testimonial-header {
+    margin-bottom: 28px;
+
+    text-align: center;
+}
+
+/* Judul */
+.testimonial-title {
+    margin: 0 0 8px;
+
+    color: #111111;
+
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+/* Baris kedua judul */
+.testimonial-title span {
+    display: block;
+
+    color: #0755b5;
+}
+
+/* Deskripsi */
+.testimonial-description {
+    margin: 0 auto;
+
+    max-width: 850px;
+
+    color: #333333;
+
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* =========================================
+   GRID TESTIMONI
+   ========================================= */
+
+.testimonial-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+/* =========================================
+   KARTU TESTIMONI
+   ========================================= */
+
+.testimonial-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 186px;
+
+    padding: 16px 17px 14px;
+
+    background: #ffffff;
+
+    border-radius: 3px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Garis biru bagian atas */
+.testimonial-card::before {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #0755b5;
+}
+
+/* Efek hover */
+.testimonial-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   BINTANG TESTIMONI
+   ========================================= */
+
+.testimonial-stars {
+    margin-bottom: 8px;
+
+    color: #ffb83f;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    letter-spacing: 0;
+
+    line-height: 1;
+}
+
+/* =========================================
+   KUTIPAN TESTIMONI
+   ========================================= */
+
+.testimonial-quote {
+    margin: 0 0 14px;
+
+    color: #333333;
+
+    font-size: 9px;
+    font-weight: 400;
+
+    line-height: 1.45;
+
+    text-align: left;
+
+    flex: 1;
+}
+
+/* =========================================
+   PROFIL PESERTA
+   ========================================= */
+
+.testimonial-profile {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    margin-top: auto;
+}
+
+/* Lingkaran inisial */
+.testimonial-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    background: #0755b5;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Informasi peserta */
+.testimonial-profile-info {
+    min-width: 0;
+}
+
+/* Nama peserta */
+.testimonial-name {
+    margin: 0 0 2px;
+
+    color: #0755b5;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+/* Status peserta */
+.testimonial-role {
+    margin: 0;
+
+    color: #666666;
+
+    font-size: 7px;
+    font-weight: 400;
+
+    line-height: 1.4;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .testimonial-section {
+        padding: 55px 24px 35px;
+    }
+
+    .testimonial-grid {
+        gap: 15px;
+    }
+
+    .testimonial-card {
+        padding: 16px 14px 14px;
+    }
+
+    .testimonial-quote {
+        font-size: 9px;
+    }
+
+    .testimonial-name {
+        font-size: 9px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .testimonial-section {
+        padding: 45px 20px 30px;
+    }
+
+    .testimonial-title {
+        font-size: 21px;
+    }
+
+    .testimonial-description {
+        font-size: 11px;
+    }
+
+    .testimonial-desktop-break {
+        display: none;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+    }
+
+    .testimonial-card {
+        min-height: 200px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .testimonial-section {
+        padding: 40px 18px 30px;
+    }
+
+    .testimonial-header {
+        margin-bottom: 24px;
+    }
+
+    .testimonial-title {
+        font-size: 19px;
+    }
+
+    .testimonial-description {
+        font-size: 10px;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 340px;
+
+        margin: 0 auto;
+
+        gap: 18px;
+    }
+
+    .testimonial-card {
+        min-height: 180px;
+
+        padding: 18px 18px 16px;
+    }
+
+    .testimonial-stars {
+        font-size: 20px;
+    }
+
+    .testimonial-quote {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+    .testimonial-avatar {
+        width: 38px;
+        height: 38px;
+
+        font-size: 11px;
+    }
+
+    .testimonial-name {
+        font-size: 10px;
+    }
+
+    .testimonial-role {
+        font-size: 8px;
+    }
+}
+
+
+/* =========================================
+   SECTION OUR IMPACT
+   ========================================= */
+
+.impact-section {
+    width: 100%;
+
+    padding: 40px 60px 20px;
+
+    background: #1055b8;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container utama */
+.impact-container {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER OUR IMPACT
+   ========================================= */
+
+.impact-header {
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+/* Judul */
+.impact-title {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* =========================================
+   GRID STATISTIK
+   ========================================= */
+
+.impact-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    align-items: stretch;
+}
+
+/* =========================================
+   KARTU STATISTIK
+   ========================================= */
+
+.impact-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 115px;
+
+    padding: 18px 25px;
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Efek hover */
+.impact-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   ANGKA STATISTIK
+   ========================================= */
+
+.impact-number {
+    margin: 0;
+
+    color: #0755b5;
+
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* =========================================
+   LABEL STATISTIK
+   ========================================= */
+
+.impact-label {
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .impact-section {
+        padding: 35px 30px 25px;
+    }
+
+    .impact-grid {
+        gap: 12px;
+    }
+
+    .impact-card {
+        min-height: 105px;
+
+        padding: 16px 18px;
+    }
+
+    .impact-number {
+        font-size: 34px;
+    }
+
+    .impact-label {
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .impact-section {
+        padding: 35px 20px 25px;
+    }
+
+    .impact-title {
+        font-size: 21px;
+    }
+
+    .impact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+    .impact-card {
+        min-height: 105px;
+
+        padding: 16px 20px;
+    }
+
+    .impact-number {
+        font-size: 36px;
+    }
+
+    .impact-label {
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .impact-section {
+        padding: 30px 18px 25px;
+    }
+
+    .impact-header {
+        margin-bottom: 20px;
+    }
+
+    .impact-title {
+        font-size: 19px;
+    }
+
+    .impact-grid {
+        gap: 12px;
+    }
+
+    .impact-card {
+        min-height: 95px;
+
+        padding: 14px 16px;
+
+        border-radius: 8px;
+    }
+
+    .impact-number {
+        font-size: 32px;
+    }
+
+    .impact-label {
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================
+   SECTION GALERI
+   ========================================= */
+
+.gallery-section {
+    width: 100%;
+
+    padding: 45px 60px 22px;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container utama */
+.gallery-container {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER GALERI
+   ========================================= */
+
+.gallery-header {
+    margin-bottom: 32px;
+
+    padding-left: 30px;
+}
+
+/* Label Galeri */
+.gallery-eyebrow {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #009cc5;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
+}
+
+/* Judul */
+.gallery-title {
+    margin: 0 0 4px;
+
+    color: #009cc5;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+/* Deskripsi */
+.gallery-description {
+    margin: 0;
+
+    color: #333333;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   GRID PREVIEW GALERI
+   ========================================= */
+
+.gallery-preview-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+
+    width: 100%;
+
+    margin-bottom: 40px;
+}
+
+/* Item gambar preview */
+.gallery-preview-item {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1.7 / 1;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    background: #e8e4ed;
+}
+
+/* Gambar preview */
+.gallery-preview-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+/* Hover gambar */
+.gallery-preview-item:hover img {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   TOMBOL LIHAT LEBIH BANYAK
+   ========================================= */
+
+.gallery-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tombol */
+.gallery-more-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 105px;
+    min-height: 24px;
+
+    padding: 6px 14px;
+
+    background: linear-gradient(
+        110deg,
+        #0066d6,
+        #00c7a5
+    );
+
+    border: none;
+    border-radius: 30px;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Hover tombol */
+.gallery-more-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 102, 214, 0.25);
+}
+
+/* =========================================
+   POPUP GALERI
+   ========================================= */
+
+.gallery-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(15, 20, 35, 0.65);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+/* Popup aktif */
+.gallery-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* =========================================
+   KONTEN POPUP
+   ========================================= */
+
+.gallery-modal-content {
+    width: 100%;
+    max-width: 1000px;
+
+    max-height: 85vh;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    overflow-y: auto;
+
+    transform: translateY(20px);
+
+    transition: transform 0.3s ease;
+}
+
+/* Animasi popup */
+.gallery-modal.active .gallery-modal-content {
+    transform: translateY(0);
+}
+
+/* =========================================
+   HEADER POPUP
+   ========================================= */
+
+.gallery-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 24px;
+}
+
+/* Judul popup */
+.gallery-modal-title {
+    margin: 0;
+
+    color: #009cc5;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Tombol close */
+.gallery-close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    background: #f1f3f7;
+
+    border: none;
+    border-radius: 50%;
+
+    color: #333333;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.gallery-close-button:hover {
+    background: #0755b5;
+
+    color: #ffffff;
+}
+
+/* =========================================
+   GRID FOTO DALAM POPUP
+   ========================================= */
+
+.gallery-modal-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+/* Item foto popup */
+.gallery-modal-item {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1.3 / 1;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: #e8e4ed;
+}
+
+/* Gambar popup */
+.gallery-modal-item img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease;
+}
+
+/* Hover gambar popup */
+.gallery-modal-item:hover img {
+    transform: scale(1.06);
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .gallery-section {
+        padding: 40px 35px 25px;
+    }
+
+    .gallery-header {
+        padding-left: 15px;
+    }
+
+    .gallery-preview-grid {
+        gap: 15px;
+    }
+
+    .gallery-modal-content {
+        max-width: 850px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .gallery-section {
+        padding: 35px 20px 25px;
+    }
+
+    .gallery-header {
+        padding-left: 0;
+
+        margin-bottom: 24px;
+    }
+
+    .gallery-title {
+        font-size: 19px;
+    }
+
+    .gallery-description {
+        font-size: 10px;
+    }
+
+    .gallery-desktop-break {
+        display: none;
+    }
+
+    .gallery-preview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+
+        margin-bottom: 28px;
+    }
+
+    .gallery-preview-item {
+        border-radius: 18px;
+    }
+
+    /* Sembunyikan gambar ketiga di mobile */
+    .gallery-preview-item:nth-child(3) {
+        display: none;
+    }
+
+    .gallery-modal {
+        padding: 15px;
+    }
+
+    .gallery-modal-content {
+        max-height: 90vh;
+
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+    .gallery-modal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .gallery-section {
+        padding: 30px 18px 25px;
+    }
+
+    .gallery-preview-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 340px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Pada mobile kecil, tampilkan satu preview */
+    .gallery-preview-item:nth-child(2) {
+        display: none;
+    }
+
+    .gallery-preview-item {
+        aspect-ratio: 1.7 / 1;
+    }
+
+    .gallery-modal-content {
+        padding: 16px;
+    }
+
+    .gallery-modal-title {
+        font-size: 19px;
+    }
+
+    .gallery-modal-grid {
+        gap: 10px;
+    }
+
+    .gallery-modal-item {
+        border-radius: 9px;
+    }
+}
+
+
+/* =========================================
+   SECTION FAQ
+   ========================================= */
+
+.faq-section {
+    width: 100%;
+
+    padding: 45px 40px 50px;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Garis pembatas bagian atas */
+.faq-section::before {
+    content: '';
+
+    display: block;
+
+    width: 94%;
+    height: 1px;
+
+    margin: -25px auto 55px;
+
+    background: #d9e6f4;
+}
+
+/* Container utama */
+.faq-container {
+    display: grid;
+
+    grid-template-columns: 0.85fr 1.15fr;
+
+    align-items: center;
+
+    gap: 35px;
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   KOLOM KIRI
+   ========================================= */
+
+.faq-left {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-left: 25px;
+}
+
+/* Judul FAQ */
+.faq-title {
+    margin: 0 0 10px;
+
+    background: linear-gradient(
+        100deg,
+        #0755b5 0%,
+        #00c7a5 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    color: #0755b5;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+/* =========================================
+   GAMBAR FAQ
+   ========================================= */
+
+.faq-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 300px;
+
+    margin-top: 0;
+}
+
+/* Gambar FAQ */
+.faq-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* =========================================
+   KOLOM KANAN
+   ========================================= */
+
+.faq-right {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
+    width: 100%;
+}
+
+/* =========================================
+   ITEM FAQ
+   ========================================= */
+
+.faq-item {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid #7ca5f5;
+
+    border-radius: 6px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+/* Efek saat FAQ dibuka */
+.faq-item.active {
+    border-color: #0755b5;
+
+    box-shadow: 0 5px 20px rgba(7, 85, 181, 0.08);
+}
+
+/* =========================================
+   PERTANYAAN FAQ
+   ========================================= */
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    width: 100%;
+    min-height: 37px;
+
+    padding: 11px 16px 11px 25px;
+
+    background: #ffffff;
+
+    border: none;
+
+    color: #111111;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+/* Teks pertanyaan */
+.faq-question span {
+    flex: 1;
+}
+
+/* =========================================
+   ICON PANAH
+   ========================================= */
+
+.faq-arrow {
+    display: block;
+
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #444444;
+
+    transition: transform 0.3s ease;
+}
+
+/* Panah berputar ketika dibuka */
+.faq-item.active .faq-arrow {
+    transform: rotate(180deg);
+}
+
+/* =========================================
+   JAWABAN FAQ
+   ========================================= */
+
+.faq-answer {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    transition: grid-template-rows 0.3s ease;
+}
+
+/* Jawaban terbuka */
+.faq-item.active .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+/* Isi jawaban */
+.faq-answer-content {
+    min-height: 0;
+
+    overflow: hidden;
+
+    padding: 0 25px;
+
+    color: #555555;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    transition: padding 0.3s ease;
+}
+
+/* Padding saat jawaban terbuka */
+.faq-item.active .faq-answer-content {
+    padding: 0 25px 15px;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .faq-section {
+        padding: 40px 25px;
+    }
+
+    .faq-container {
+        grid-template-columns: 0.9fr 1.1fr;
+
+        gap: 25px;
+    }
+
+    .faq-left {
+        padding-left: 10px;
+    }
+
+    .faq-title {
+        font-size: 19px;
+    }
+
+    .faq-image-wrapper {
+        max-width: 260px;
+    }
+
+    .faq-question {
+        padding-left: 18px;
+
+        font-size: 10px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .faq-section {
+        padding: 35px 20px;
+    }
+
+    .faq-section::before {
+        margin: -15px auto 35px;
+    }
+
+    .faq-container {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .faq-left {
+        align-items: center;
+
+        padding-left: 0;
+
+        text-align: center;
+    }
+
+    .faq-title {
+        font-size: 22px;
+    }
+
+    .faq-image-wrapper {
+        max-width: 260px;
+    }
+
+    .faq-right {
+        gap: 12px;
+    }
+
+    .faq-question {
+        min-height: 45px;
+
+        padding: 12px 16px;
+
+        font-size: 11px;
+    }
+
+    .faq-answer-content {
+        font-size: 11px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .faq-section {
+        padding: 30px 18px;
+    }
+
+    .faq-title {
+        font-size: 20px;
+    }
+
+    .faq-image-wrapper {
+        max-width: 230px;
+    }
+
+    .faq-question {
+        gap: 12px;
+
+        padding: 12px 14px;
+
+        font-size: 10px;
+    }
+
+    .faq-arrow {
+        width: 16px;
+        height: 16px;
+    }
+
+    .faq-answer-content {
+        padding: 0 14px;
+
+        font-size: 10px;
+    }
+
+    .faq-item.active .faq-answer-content {
+        padding: 0 14px 14px;
+    }
+}
+
+
+/* =========================================
+   SECTION KONTAK
+   ========================================= */
+
+.contact-section {
+    width: 100%;
+
+    padding: 55px 0 0;
+
+    background: #000000;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    scroll-margin-top: 90px;
+}
+
+/* Container utama */
+.contact-container {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0 40px 48px;
+}
+
+/* =========================================
+   HEADER KONTAK
+   ========================================= */
+
+.contact-header {
+    margin-bottom: 22px;
+}
+
+/* Judul gradasi */
+.contact-title {
+    display: inline-block;
+
+    margin: 0 0 10px;
+
+    background: linear-gradient(
+        100deg,
+        #0075db 0%,
+        #00c7a5 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    color: #00a8c5;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+/* Deskripsi */
+.contact-description {
+    margin: 0;
+
+    color: #eeeeee;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   GRID KARTU KONTAK
+   ========================================= */
+
+.contact-card-grid {
+    display: grid;
+
+    grid-template-columns: 0.85fr 1fr 1.15fr;
+
+    gap: 13px;
+
+    width: 100%;
+}
+
+/* =========================================
+   KARTU KONTAK
+   ========================================= */
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    min-width: 0;
+    min-height: 95px;
+
+    padding: 17px 14px 13px;
+
+    background: #555555;
+
+    border: 1px solid #666666;
+
+    border-radius: 11px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+/* Hover kartu */
+.contact-card:hover {
+    background: #626262;
+
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   IKON KONTAK
+   ========================================= */
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 23px;
+    height: 23px;
+
+    margin-bottom: 8px;
+
+    background: linear-gradient(
+        135deg,
+        #0087ed,
+        #00c7a5
+    );
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+/* SVG icon */
+.contact-icon svg {
+    display: block;
+
+    width: 17px;
+    height: 17px;
+}
+
+/* =========================================
+   JUDUL KARTU
+   ========================================= */
+
+.contact-card h3 {
+    margin: 0 0 5px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+/* =========================================
+   ISI KARTU
+   ========================================= */
+
+.contact-card p {
+    margin: 0;
+
+    color: #eeeeee;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.contact-footer {
+    width: 100%;
+
+    border-top: 1px solid #303030;
+}
+
+/* Container footer */
+.contact-footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    width: 100%;
+    max-width: 1100px;
+
+    min-height: 55px;
+
+    margin: 0 auto;
+
+    padding: 12px 40px;
+}
+
+/* =========================================
+   COPYRIGHT
+   ========================================= */
+
+.footer-copyright {
+    flex-shrink: 0;
+
+    color: #eeeeee;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    white-space: nowrap;
+}
+
+/* =========================================
+   NAVIGASI FOOTER
+   ========================================= */
+
+.footer-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+}
+
+/* Link footer */
+.footer-navigation a {
+    color: #eeeeee;
+
+    font-size: 10px;
+    font-weight: 400;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+/* Hover navigasi */
+.footer-navigation a:hover {
+    color: #00c7a5;
+}
+
+/* =========================================
+   MEDIA SOSIAL
+   ========================================= */
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+}
+
+/* Link sosial */
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    color: #eeeeee;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Icon sosial */
+.footer-social svg {
+    display: block;
+
+    width: 17px;
+    height: 17px;
+}
+
+/* Hover sosial */
+.footer-social a:hover {
+    color: #00c7a5;
+
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    .contact-container {
+        padding: 0 30px 40px;
+    }
+
+    .contact-card-grid {
+        gap: 12px;
+    }
+
+    .contact-card {
+        padding: 15px 12px;
+    }
+
+    .contact-footer-container {
+        padding: 12px 25px;
+
+        gap: 18px;
+    }
+
+    .footer-navigation {
+        gap: 14px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .contact-section {
+        padding-top: 40px;
+    }
+
+    .contact-container {
+        padding: 0 20px 35px;
+    }
+
+    .contact-title {
+        font-size: 24px;
+    }
+
+    .contact-description {
+        font-size: 11px;
+    }
+
+    .contact-desktop-break {
+        display: none;
+    }
+
+    .contact-card-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .contact-card {
+        min-height: 90px;
+
+        padding: 15px 16px;
+    }
+
+    .contact-card h3 {
+        font-size: 12px;
+    }
+
+    .contact-card p {
+        font-size: 11px;
+    }
+
+    /* Footer menjadi vertikal */
+    .contact-footer-container {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 18px;
+
+        padding: 22px 20px;
+    }
+
+    .footer-copyright {
+        font-size: 10px;
+
+        text-align: center;
+
+        white-space: normal;
+    }
+
+    .footer-navigation {
+        flex-wrap: wrap;
+
+        gap: 15px;
+    }
+
+    .footer-navigation a {
+        font-size: 11px;
+    }
+
+    .footer-social {
+        justify-content: center;
+
+        gap: 15px;
+    }
+}
+
+/* =========================================
+   MOBILE KECIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .contact-section {
+        padding-top: 35px;
+    }
+
+    .contact-container {
+        padding: 0 18px 30px;
+    }
+
+    .contact-title {
+        font-size: 22px;
+    }
+
+    .contact-description {
+        font-size: 10px;
+    }
+
+    .contact-card-grid {
+        gap: 12px;
+    }
+
+    .contact-card {
+        min-height: 88px;
+    }
+
+    .footer-navigation {
+        gap: 12px;
+    }
+
+    .footer-navigation a {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================
+   HALAMAN PENDAFTARAN PESERTA
+   ========================================= */
+
+.registration-section {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 70px 20px;
+
+    background: #f8f4fc;
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Container halaman */
+.registration-container {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER PENDAFTARAN
+   ========================================= */
+
+.registration-header {
+    margin-bottom: 30px;
+
+    text-align: center;
+}
+
+/* Label kecil */
+.registration-eyebrow {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #009cc5;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+/* Judul utama */
+.registration-header h1 {
+    margin: 0 0 12px;
+
+    color: #0755b5;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+/* Gradasi judul */
+.registration-header h1 span {
+    display: inline-block;
+
+    background: linear-gradient(
+        100deg,
+        #0755b5,
+        #00c7a5
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+/* Deskripsi */
+.registration-header p {
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    color: #666666;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 1.7;
+}
+
+/* =========================================
+   KARTU FORM
+   ========================================= */
+
+.registration-card {
+    width: 100%;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================
+   FIELD FORM
+   ========================================= */
+
+.registration-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 22px;
+}
+
+/* Label */
+.registration-field label {
+    color: #222222;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Tanda wajib */
+.registration-field label span {
+    color: #e53935;
+}
+
+/* Input dan dropdown */
+.registration-field input:not([type="file"]),
+.registration-field select {
+    width: 100%;
+    height: 45px;
+
+    padding: 0 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 8px;
+
+    color: #333333;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Placeholder */
+.registration-field input::placeholder {
+    color: #aaaaaa;
+}
+
+/* Focus */
+.registration-field input:focus,
+.registration-field select:focus {
+    border-color: #0755b5;
+
+    box-shadow: 0 0 0 3px rgba(7, 85, 181, 0.08);
+}
+
+/* =========================================
+   UPLOAD BUKTI PEMBAYARAN
+   ========================================= */
+
+.registration-upload {
+    padding: 18px;
+
+    background: #f8faff;
+
+    border: 1px dashed #9ab8ed;
+
+    border-radius: 10px;
+}
+
+/* Input file */
+.registration-upload input[type="file"] {
+    width: 100%;
+
+    color: #555555;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 11px;
+}
+
+/* Deskripsi upload */
+.registration-upload p {
+    margin: 10px 0 0;
+
+    color: #888888;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+/* =========================================
+   PESAN VALIDASI
+   ========================================= */
+
+.registration-error {
+    display: block;
+
+    color: #dc2626;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 1.5;
+}
+
+/* =========================================
+   CATATAN PENDAFTARAN
+   ========================================= */
+
+.registration-note {
+    margin: 5px 0 22px;
+
+    padding: 14px;
+
+    background: #f2f8ff;
+
+    border-left: 3px solid #0755b5;
+
+    border-radius: 5px;
+}
+
+/* Teks catatan */
+.registration-note p {
+    margin: 0;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+/* =========================================
+   TOMBOL KIRIM
+   ========================================= */
+
+.registration-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 12px 20px;
+
+    background: linear-gradient(
+        100deg,
+        #0755b5,
+        #00c7a5
+    );
+
+    border: none;
+
+    border-radius: 30px;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Hover tombol */
+.registration-submit:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(7, 85, 181, 0.2);
+}
+
+/* =========================================
+   PESAN BERHASIL
+   ========================================= */
+
+.registration-success {
+    margin-bottom: 20px;
+
+    padding: 15px 18px;
+
+    background: #e8f8ef;
+
+    border: 1px solid #b8e6c9;
+
+    border-radius: 8px;
+
+    color: #18743b;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    line-height: 1.6;
+}
+
+/* =========================================
+   KEMBALI KE BERANDA
+   ========================================= */
+
+.registration-back {
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+/* Link kembali */
+.registration-back a {
+    color: #0755b5;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+/* Hover */
+.registration-back a:hover {
+    color: #00a98d;
+}
+
+/* =========================================
+   RESPONSIVE TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .registration-section {
+        padding: 50px 20px;
+    }
+
+    .registration-header h1 {
+        font-size: 28px;
+    }
+
+    .registration-card {
+        padding: 28px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .registration-section {
+        padding: 35px 15px;
+    }
+
+    .registration-header {
+        margin-bottom: 25px;
+    }
+
+    .registration-header h1 {
+        font-size: 24px;
+    }
+
+    .registration-header p {
+        font-size: 11px;
+    }
+
+    .registration-card {
+        padding: 22px 18px;
+
+        border-radius: 14px;
+    }
+
+    .registration-field {
+        margin-bottom: 20px;
+    }
+
+    .registration-field label {
+        font-size: 11px;
+    }
+
+    .registration-field input:not([type="file"]),
+    .registration-field select {
+        height: 43px;
+
+        font-size: 11px;
+    }
+
+    .registration-submit {
+        min-height: 45px;
+
+        font-size: 12px;
+    }
+}
+
