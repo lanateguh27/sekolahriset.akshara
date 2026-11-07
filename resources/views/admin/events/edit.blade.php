@@ -13,6 +13,7 @@
         <form
             action="{{ route('admin.events.update', $event) }}"
             method="POST"
+            enctype="multipart/form-data"
         >
             @csrf
             @method('PUT')
