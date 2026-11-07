@@ -16,6 +16,11 @@ class Event extends Model
         'speaker_name',
     ];
 
+    public function categories()
+    {
+        return $this->hasMany(EventCategory::class);
+    }
+
     protected function casts(): array
     {
         return [
