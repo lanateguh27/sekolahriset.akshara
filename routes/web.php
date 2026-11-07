@@ -18,6 +18,25 @@ Route::get('/', function () {
     return view('pages.home', compact('events'));
 });
 
+Route::get('/events/{event}/poster', function (Event $event) {
+    abort_if(empty($event->poster), 404);
+
+    $disk = Storage::disk('public');
+    $file = $event->poster;
+
+    abort_unless($disk->exists($file), 404);
+
+    return $disk->response(
+        $file,
+        basename($file),
+        [
+            'Content-Type' => $disk->mimeType($file) ?: 'application/octet-stream',
+            'X-Content-Type-Options' => 'nosniff',
+        ],
+        'inline'
+    );
+})->name('events.poster');
+
 Route::get('/pendaftaran', [ParticipantController::class, 'create'])
     ->name('pendaftaran.create');
 
