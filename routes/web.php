@@ -38,6 +38,9 @@ Route::get('/events/{event}/poster', function (Event $event) {
     );
 })->name('events.poster');
 
+Route::get('/events/{event}/categories', [ParticipantController::class, 'categories'])
+    ->name('events.categories');
+
 Route::get('/pendaftaran', [ParticipantController::class, 'create'])
     ->name('pendaftaran.create');
 
