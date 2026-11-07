@@ -70,6 +70,8 @@
 
                             <td>
                                 <div class="event-actions">
+                                    <a href="{{ route('admin.events.categories.index', $event) }}" class="action-edit">Kategori</a>
+
                                     <a
                                         href="{{ route('admin.events.edit', $event) }}"
                                         class="action-edit"
