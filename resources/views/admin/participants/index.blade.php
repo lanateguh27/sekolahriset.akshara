@@ -45,6 +45,8 @@
                         <th>Nama Peserta</th>
                         <th>Asal Instansi</th>
                         <th>Acara</th>
+                        <th>Kategori</th>
+                        <th>Biaya</th>
                         <th>Email</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -58,6 +60,8 @@
                             <td><strong>{{ $participant->name }}</strong></td>
                             <td>{{ $participant->institution }}</td>
                             <td>{{ $participant->event?->title ?? 'Acara tidak tersedia' }}</td>
+                            <td>{{ $participant->category_name_snapshot ?: 'Belum tercatat' }}</td>
+                            <td>{{ $participant->price_amount !== null ? 'Rp ' . number_format((float) $participant->price_amount, 0, ',', '.') . ' (' . ($participant->price_type === 'early_bird' ? 'Early Bird' : 'Normal') . ')' : 'Belum tercatat' }}</td>
                             <td>{{ $participant->email }}</td>
                             <td>
                                 <span class="event-status {{ $participant->status }}">
@@ -87,7 +91,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="table-empty">
+                            <td colspan="9" class="table-empty">
                                 Belum ada peserta pada daftar ini.
                             </td>
                         </tr>
@@ -147,6 +151,10 @@
                 'phone' => $participant->phone,
                 'email' => $participant->email,
                 'event' => $participant->event?->title ?? 'Acara tidak tersedia',
+                'category' => $participant->category_name_snapshot ?: 'Belum tercatat',
+                'price' => $participant->price_amount !== null
+                    ? 'Rp ' . number_format((float) $participant->price_amount, 0, ',', '.') . ' (' . ($participant->price_type === 'early_bird' ? 'Early Bird' : 'Normal') . ')'
+                    : 'Belum tercatat',
                 'information_source' => $participant->information_source,
                 'payment_proof_url' => route('admin.participants.payment-proof', $participant),
                 'ktm_url' => $participant->ktm_path
@@ -246,6 +254,8 @@ function createParticipantImage(url, altText) {
                 ['Nomor HP', participant.phone],
                 ['Email', participant.email],
                 ['Acara', participant.event],
+                ['Kategori Peserta', participant.category],
+                ['Biaya Pendaftaran', participant.price],
                 ['Sumber Informasi', participant.information_source],
                 ['Status', participant.status]
             ];
