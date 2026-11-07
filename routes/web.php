@@ -6,6 +6,7 @@ use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\ParticipantController as AdminParticipantController;
 use App\Models\Event;
 use App\Models\Participant;
@@ -60,6 +61,11 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::resource('events', EventController::class)
         ->names('admin.events');
+
+    Route::get('/events/{event}/categories', [EventCategoryController::class, 'index'])->name('admin.events.categories.index');
+    Route::post('/events/{event}/categories', [EventCategoryController::class, 'store'])->name('admin.events.categories.store');
+    Route::put('/events/{event}/categories/{category}', [EventCategoryController::class, 'update'])->name('admin.events.categories.update');
+    Route::delete('/events/{event}/categories/{category}', [EventCategoryController::class, 'destroy'])->name('admin.events.categories.destroy');
 
     Route::get('/participants', [AdminParticipantController::class, 'index'])
         ->name('admin.participants.index');
