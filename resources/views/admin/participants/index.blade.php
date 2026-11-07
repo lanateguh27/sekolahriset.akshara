@@ -212,17 +212,6 @@ function createParticipantImage(url, altText) {
 
     wrapper.appendChild(image);
 
-    // Tetap sediakan link untuk membuka gambar di tab baru.
-    const link = document.createElement('a');
-
-    link.href = url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.textContent = 'Buka gambar di tab baru';
-    link.className = 'participant-document-link';
-
-    wrapper.appendChild(link);
-
     return wrapper;
 }
 
