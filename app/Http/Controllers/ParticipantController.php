@@ -33,7 +33,8 @@ class ParticipantController extends Controller
                 $earlyBirdActive = $category->early_bird_price !== null
                     && $category->early_bird_start !== null
                     && $category->early_bird_end !== null
-                    && $now->betweenIncluded($category->early_bird_start, $category->early_bird_end);
+                    && $now->greaterThanOrEqualTo($category->early_bird_start)
+                    && $now->lessThanOrEqualTo($category->early_bird_end);
 
                 return [
                     'id' => $category->id,
