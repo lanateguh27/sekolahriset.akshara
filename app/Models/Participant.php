@@ -10,6 +10,10 @@ class Participant extends Model
     // Field yang boleh diisi melalui proses pendaftaran
     protected $fillable = [
         'event_id',
+        'event_category_id',
+        'category_name_snapshot',
+        'price_type',
+        'price_amount',
         'name',
         'institution',
         'city',
@@ -24,6 +28,11 @@ class Participant extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function eventCategory()
+    {
+        return $this->belongsTo(EventCategory::class);
     }
 }
 
