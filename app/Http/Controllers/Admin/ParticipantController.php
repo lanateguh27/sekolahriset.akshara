@@ -1,15 +1,14 @@
 <?php
 
-namespace App\\Http\\Controllers\\Admin;
+namespace App\Http\Controllers\Admin;
 
-use App\\Http\\Controllers\\Controller;
-use App\\Models\\Participant;
-use Illuminate\\Http\\Request;
-use Illuminate\\Support\\Facades\\Storage;
+use App\Http\Controllers\Controller;
+use App\Models\Participant;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ParticipantController extends Controller
 {
-    // Menampilkan peserta berdasarkan status
     public function index(Request $request)
     {
         $status = $request->query('status', 'pending');
@@ -24,13 +23,9 @@ class ParticipantController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('admin.participants.index', compact(
-            'participants',
-            'status'
-        ));
+        return view('admin.participants.index', compact('participants', 'status'));
     }
 
-    // Memverifikasi peserta
     public function verify(Participant $participant)
     {
         if ($participant->status !== 'pending') {
@@ -39,16 +34,13 @@ class ParticipantController extends Controller
                 ->with('error', 'Peserta ini sudah diverifikasi.');
         }
 
-        $participant->update([
-            'status' => 'verified',
-        ]);
+        $participant->update(['status' => 'verified']);
 
         return redirect()
             ->route('admin.participants.index', ['status' => 'pending'])
             ->with('success', 'Peserta berhasil diverifikasi.');
     }
 
-    // Menghapus peserta beserta file dokumennya
     public function destroy(Participant $participant)
     {
         $disk = Storage::disk('local');
