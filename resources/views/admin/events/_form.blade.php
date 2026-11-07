@@ -51,7 +51,7 @@
             <p>Poster saat ini:</p>
 
             <img
-                src="{{ asset('storage/' . $event->poster) }}"
+                src="{{ route('events.poster', $event) }}"
                 alt="Poster {{ $event->title }}"
                 style="max-width: 220px; height: auto;"
             >
