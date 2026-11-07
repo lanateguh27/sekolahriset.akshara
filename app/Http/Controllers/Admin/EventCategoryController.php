@@ -41,8 +41,8 @@ class EventCategoryController extends Controller
             'name' => ['required', 'string', 'max:100'],
             'normal_price' => ['required', 'numeric', 'min:0'],
             'early_bird_price' => ['nullable', 'numeric', 'min:0'],
-            'early_bird_start' => ['nullable', 'date', 'required_with:early_bird_end'],
-            'early_bird_end' => ['nullable', 'date', 'after_or_equal:early_bird_start', 'required_with:early_bird_start'],
+            'early_bird_start' => ['nullable', 'date', 'required_with:early_bird_end,early_bird_price'],
+            'early_bird_end' => ['nullable', 'date', 'after_or_equal:early_bird_start', 'required_with:early_bird_start,early_bird_price'],
         ]) + ['is_active' => $request->boolean('is_active')];
     }
 }
